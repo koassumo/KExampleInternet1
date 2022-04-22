@@ -96,12 +96,10 @@ class DetailedFragment : Fragment() {
 //    }
 
     private fun displayData (apodResponseApi: APODResponseApi) {
-        requireActivity().runOnUiThread {
             tv_title_apod.text = apodResponseApi.title
             tv_copyright_apod.text = "\u00A9 ${apodResponseApi.copyright}"
             tv_date_apod.text = apodResponseApi.date
             tv_explanation_apod.text = apodResponseApi.explanation
-        }
     }
 
 
