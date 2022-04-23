@@ -13,6 +13,7 @@ import com.example.kexampleinternet1.R
 import com.example.kexampleinternet1.model.APODLoader
 import com.example.kexampleinternet1.model.APODResponseDTO
 import com.example.kexampleinternet1.model.retrofit.api.APODResponseApi
+import com.example.kexampleinternet1.ui.GladeImageLoader
 import com.example.kexamplerecycleview.model.repo.retrofit.RetrofitAPODRepo
 import io.reactivex.rxjava3.core.Single
 import kotlinx.android.synthetic.main.detailed_fragment.*
@@ -29,7 +30,6 @@ import kotlinx.android.synthetic.main.detailed_fragment.*
 //    Данный класс использует rxjava, schedulers, автоматизирует все соединение
 // 6. Во фрагменте оформляется подписка на single rxjava (т.е. [2] и [4])
 //    Кстати callback [1] получается, что тоже прямо во фрагменте задается
-
 
 
 class DetailedFragment : Fragment() {
@@ -83,7 +83,6 @@ class DetailedFragment : Fragment() {
         })
 
 
-
     }
 
 //    private fun displayData (apodResponseDTO: APODResponseDTO) {
@@ -95,11 +94,13 @@ class DetailedFragment : Fragment() {
 //        }
 //    }
 
-    private fun displayData (apodResponseApi: APODResponseApi) {
-            tv_title_apod.text = apodResponseApi.title
-            tv_copyright_apod.text = "\u00A9 ${apodResponseApi.copyright}"
-            tv_date_apod.text = apodResponseApi.date
-            tv_explanation_apod.text = apodResponseApi.explanation
+    private fun displayData(apodResponseApi: APODResponseApi) {
+        val imageLoader = GladeImageLoader()
+        apodResponseApi.url?.let { imageLoader.loadInto(it, iv_url_apod) }
+        tv_title_apod.text = apodResponseApi.title
+        tv_copyright_apod.text = "\u00A9 ${apodResponseApi.copyright}"
+        tv_date_apod.text = apodResponseApi.date
+        tv_explanation_apod.text = apodResponseApi.explanation
     }
 
 
