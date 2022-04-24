@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import com.example.kexampleinternet1.HolderApi
 import com.example.kexampleinternet1.R
-import com.example.kexampleinternet1.model.APODLoader
-import com.example.kexampleinternet1.model.APODResponseDTO
 import com.example.kexampleinternet1.model.retrofit.api.APODResponseApi
 import com.example.kexampleinternet1.ui.GladeImageLoader
 import com.example.kexamplerecycleview.model.repo.retrofit.RetrofitAPODRepo

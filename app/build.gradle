@@ -30,6 +30,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
+    // Код на groovy: в файле apikey.properties из переменной nasa_api_key достаем ключ
+    // и сохраняем в константу NASA_API_KEY
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream ())
+        def apiKey  = properties.getProperty("nasa_api_key", "")
+        it.buildConfigField "String", "NASA_API_KEY", apiKey
+    }
 }
 
 dependencies {
@@ -48,6 +58,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
     //RX
