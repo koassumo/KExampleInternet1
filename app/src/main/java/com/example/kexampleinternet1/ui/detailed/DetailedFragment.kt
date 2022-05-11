@@ -8,20 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import coil.load
 import com.example.kexampleinternet1.HolderApi
 import com.example.kexampleinternet1.R
-import com.example.kexampleinternet1.model.retrofit.api.APODResponseApi
-import com.example.kexampleinternet1.ui.GladeImageLoader
+import com.example.kexampleinternet1.model.retrofit.api.APODResponseDTO
 import com.example.kexamplerecycleview.model.repo.retrofit.RetrofitAPODRepo
 import io.reactivex.rxjava3.core.Single
 import kotlinx.android.synthetic.main.detailed_fragment.*
 
 
+// Не забываем про permission и про app.properties с ключом api
+
 // Для работы retrofit:
 // 1. Зависимости в gradle (включая rxjava)
 // 2. В моделе создать DTO версию объекта для распарсинга. Особенности - анотации (@Parcelize():
-//    Parcelable, @Expose, @SerializedName). В данном проекте все классы для retrofit помечены как Api.
+//    Parcelable, @Expose, @SerializedName). В данном проекте некот.классы для retrofit помечены также как Api.
 // 3. Рядом интерфейс (IDataApi), в котором сам запрос api (в строке url -это вторая часть после слэш)
+
 // 4. Создать ApiHolder (HolderApi), который с помощью билдера собирает полный api-запрос в объект dataApi:
 //    базовый url, находящийся в ApiHolder, + подключается интерфейс IDataApi из модели
 // 5. Создаем класс обращения к серверу (RetrofitAPODRepo) на основе интерфейса IRepoApi
@@ -72,7 +75,9 @@ class DetailedFragment : Fragment() {
 //        loader.loadAPOD()
 //        // т.е. запускаем лоудер
 
-        val anySingle: Single<APODResponseApi> = RetrofitAPODRepo(HolderApi().dataApi).getRepoApi()
+
+
+        val anySingle: Single<APODResponseDTO> = RetrofitAPODRepo(HolderApi().dataApi).getRepoApi()
         anySingle.subscribe({
             println(it)
             displayData(it)
@@ -92,13 +97,12 @@ class DetailedFragment : Fragment() {
 //        }
 //    }
 
-    private fun displayData(apodResponseApi: APODResponseApi) {
-        val imageLoader = GladeImageLoader()
-        apodResponseApi.url?.let { imageLoader.loadInto(it, iv_url_apod) }
-        tv_title_apod.text = apodResponseApi.title
-        tv_copyright_apod.text = "\u00A9 ${apodResponseApi.copyright}"
-        tv_date_apod.text = apodResponseApi.date
-        tv_explanation_apod.text = apodResponseApi.explanation
+    private fun displayData(apodResponseDTO: APODResponseDTO) {
+        iv_url_apod.load (apodResponseDTO.url)
+        tv_title_apod.text = apodResponseDTO.title
+        tv_copyright_apod.text = "\u00A9 ${apodResponseDTO.copyright}"
+        tv_date_apod.text = apodResponseDTO.date
+        tv_explanation_apod.text = apodResponseDTO.explanation
     }
 
 

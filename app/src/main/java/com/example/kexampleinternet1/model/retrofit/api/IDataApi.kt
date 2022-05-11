@@ -17,9 +17,11 @@ interface IDataApi {
 
 
     // тут то, что в запросе api после слэша
-    @GET( "/planetary/apod")
-    fun getApi(@Query("api_key") key: String = BuildConfig.NASA_API_KEY): Single<APODResponseApi>
+    @GET( "/planetary/apod?date=2022-05-02")
+    fun getApi(@Query("api_key") key: String = BuildConfig.NASA_API_KEY): Single<APODResponseDTO>
     // DTO тут в треугольных скобках
     // Single тут из RXJAVA
+
+    // ?date=2022-05-02 в запросе поставлен, т.к. не всегда today - это картинка (может видео)
 
 }

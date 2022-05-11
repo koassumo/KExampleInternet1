@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class APODResponseApi(
+data class APODResponseDTO(
 
     // тут такой вариант DTO
 
