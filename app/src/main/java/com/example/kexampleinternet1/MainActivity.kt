@@ -6,6 +6,8 @@ import com.example.kexampleinternet1.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
+    // comment in detailedFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)

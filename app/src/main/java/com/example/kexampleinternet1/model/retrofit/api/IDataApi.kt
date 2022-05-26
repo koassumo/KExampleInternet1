@@ -7,10 +7,6 @@ import retrofit2.http.Query
 
 interface IDataApi {
 
-    // !!! Все классы, относящиеся к Retrofit в этом проекте, помечены на конце -Api
-
-    // class APODLoader удален.
-
     // Касательно api_key - в gradle добавлен код на groove, который отрабатывается во время
     // компиляции, а именно автоматически генерирует файл BuildConfig и добавляет туда
     // константу - public static final String NASA_API_KEY = "DEMO_KEY";
