@@ -1,8 +1,8 @@
-package com.example.kexampleinternet1
+package com.example.kexampleinternet1.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.kexampleinternet1.ui.main.MainFragment
+import com.example.kexampleinternet1.R
 
 class MainActivity : AppCompatActivity() {
 
